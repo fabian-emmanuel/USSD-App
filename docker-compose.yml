@@ -1,0 +1,28 @@
+version: '3.7'
+
+services:
+  web:
+    image: 'ussd:latest'
+    build: .
+    ports:
+      - "80:5000"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://ussd_db:5432/ussd
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: root
+      SPRING_JPA_HIBERNATE_DDL_AUTO: update
+    depends_on:
+      - ussd_db
+    container_name: ussd_app
+      
+  ussd_db:
+    image: postgres:latest
+    volumes:
+      - ussd-postgres-data:/var/lib/postgres
+    environment:
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=password
+    container_name: ussd_db
+
+volumes:
+  ussd-postgres-data:

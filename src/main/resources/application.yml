@@ -1,0 +1,9 @@
+api:
+  module-name: Ussd API
+  version: 1.0
+  app-name: USSD
+  website: https://github.com/fabian-emmanuel/USSD-App
+  email: emmanuel.fabian.dev@gmail.com
+
+server:
+  port: 80
