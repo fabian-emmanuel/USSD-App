@@ -6,4 +6,19 @@ api:
   email: emmanuel.fabian.dev@gmail.com
 
 server:
-  port: 80
+  port: ${PORT:9005}
+spring:
+  devtools:
+    add-properties: false
+  datasource:
+    url: ${DB_URL:jdbc:mysql://localhost:3306/ussd?createDatabaseIfNotExist=true&useUnicode=true&characterEncoding=utf8&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC}
+    username: ${DB_USERNAME:root}
+    password: ${DB_PASSWORD:root}
+  jpa:
+    hibernate.ddl-auto: update
+    generate-ddl: true
+    show-sql: false
+
+
+flw-secret-key: ${FLW_SECRET_KEY:FLWSECK_TEST-a09998bc3cf10547962ebe85b824685c-X}
+ap-sandbox-key: ${AT_SANDBOX_KEY:b551be471e28b14fd87cbc832175cfe79b4eddedb54b9fef5e48a17db920ca06}
