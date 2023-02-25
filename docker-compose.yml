@@ -1,28 +1,41 @@
-version: '3.7'
-
+version: '3.8'
 services:
-  web:
+  ussd_app:
+    container_name: ussd_app
     image: 'ussd:latest'
-    build: .
+    build:
+      context: .
     ports:
-      - "80:5000"
+      - "5000:5000"
     environment:
-      SPRING_DATASOURCE_URL: jdbc:postgresql://ussd_db:5432/ussd
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/ussd
       SPRING_DATASOURCE_USERNAME: root
-      SPRING_DATASOURCE_PASSWORD: root
+      SPRING_DATASOURCE_PASSWORD: password
       SPRING_JPA_HIBERNATE_DDL_AUTO: update
     depends_on:
-      - ussd_db
-    container_name: ussd_app
-      
-  ussd_db:
-    image: postgres:latest
-    volumes:
-      - ussd-postgres-data:/var/lib/postgres
-    environment:
-      - POSTGRES_USER=root
-      - POSTGRES_PASSWORD=password
+      - mysql
+      - redis
+
+  mysql:
     container_name: ussd_db
+    image: mysql:latest
+    volumes:
+      - ussd-mysql-data:/var/lib/mysql
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: ussd
+
+  redis:
+    container_name: redis-server
+    image: redis:latest
+    command: redis-server --requirepass root
+    volumes:
+      - redis-data:/data
+    ports:
+      - "6379:6379"
 
 volumes:
-  ussd-postgres-data:
+  ussd-mysql-data:
+  redis-data:
