@@ -1,44 +1,41 @@
 package com.credo.ussd.model;
 
+import com.credo.ussd.enums.TransactionType;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.Size;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "users")
+@Table(name = "transactions")
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Getter
 @Setter
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class User {
+public class Transaction {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
-    @Size(min = 3, message = "Name can not be less than 3")
-    String name;
+    @Enumerated(EnumType.STRING)
+    private TransactionType transactionType;
 
-    @NotEmpty
-    @Email
-    String email;
+    private BigDecimal amount;
+    private String trxRef;
 
-    @NotEmpty
-    @Size(min = 11, message = "Phone number should have at least 11 characters")
-    String phoneNumber;
+    private Long flwRef;
 
-    @Size(min = 11, max = 11, message = "BVN number must not be less than 11")
-    String bvn;
+    @OneToOne(cascade = CascadeType.MERGE)
+    private User user;
 
-    @Size(min = 4, max = 4, message = "Pin can not be more than 4")
-    String pin;
+    @OneToOne(cascade = CascadeType.MERGE)
+    private Wallet wallet;
 
     @CreationTimestamp
     @Builder.Default

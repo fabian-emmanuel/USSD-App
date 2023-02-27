@@ -18,7 +18,12 @@ spring:
     hibernate.ddl-auto: update
     generate-ddl: true
     show-sql: false
+    open-in-view: false
 
 
 flw-secret-key: ${FLW_SECRET_KEY:FLWSECK_TEST-a09998bc3cf10547962ebe85b824685c-X}
 ap-sandbox-key: ${AT_SANDBOX_KEY:b551be471e28b14fd87cbc832175cfe79b4eddedb54b9fef5e48a17db920ca06}
+twilio:
+  authToken: a4d3380999a9b54192122bf61cb0379f
+  accountSid: AC0748c56b1fbd759a9d9e2d57be472f1a
+  msgSid: MGbfaf6f3ee981f3020805b3c96b762d8b

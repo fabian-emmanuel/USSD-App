@@ -14,7 +14,7 @@ import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.reactive.function.client.support.WebClientAdapter;
 import org.springframework.web.service.invoker.HttpServiceProxyFactory;
 
-import static com.credo.ussd.constants.FlwApi.FLW_BASE_URL;
+import static com.credo.ussd.constants.Api.FLW_BASE_URL;
 import static com.credo.ussd.utils.Util.getAuthHeader;
 
 @Configuration

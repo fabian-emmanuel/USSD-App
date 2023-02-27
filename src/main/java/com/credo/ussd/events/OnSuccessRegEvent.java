@@ -1,6 +1,7 @@
 package com.credo.ussd.events;
 
 import com.credo.ussd.model.User;
+import com.credo.ussd.model.Wallet;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -14,9 +15,11 @@ import org.springframework.context.ApplicationEvent;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class OnSuccessRegEvent extends ApplicationEvent {
     User user;
+    Wallet wallet;
 
-    public OnSuccessRegEvent(User user) {
+    public OnSuccessRegEvent(User user, Wallet wallet) {
         super(user);
         this.user = user;
+        this.wallet = wallet;
     }
 }

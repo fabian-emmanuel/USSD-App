@@ -16,7 +16,7 @@ public class OnSuccessRegEventListener implements ApplicationListener<OnSuccessR
 
     @Override
     public void onApplicationEvent(OnSuccessRegEvent event) {
-        smsService.sendSmsNotification(event.getUser());
+        smsService.sendSmsNotification(event.getUser(), event.getWallet());
         log.info("Sms Notification Has Been Sent}");
     }
 }
